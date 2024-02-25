@@ -8,10 +8,32 @@ def main(page: ft.Page):
     page.window_width = 650
     page.window_height = 450
 
+    popular = {
+        "Bitcoin": "btc",
+        "Ethirium": "eth",
+        "USDT": "usdt",
+    }
+    
     user_output = ft.Text(value='')
     user_output_table = ft.Text(value='')
-    input1 = ft.TextField(label='Enter first currency:', on_change=lambda _: update_output())
-    input2 = ft.TextField(label='Enter second currency:', on_change=lambda _: update_output())
+    input1 = ft.Dropdown(
+        label='Enter first currency:',options=[
+            ft.dropdown.Option("btc"),
+            ft.dropdown.Option("eth"),
+            ft.dropdown.Option("doge"),
+            ft.dropdown.Option("usdt"),
+            ], 
+            on_change=lambda _: update_output()
+            )
+    input2 = ft.Dropdown(
+        label='Enter second currency:',options=[
+            ft.dropdown.Option("btc"),
+            ft.dropdown.Option("eth"),
+            ft.dropdown.Option("doge"),
+            ft.dropdown.Option("usdt"),
+            ], 
+            on_change=lambda _: update_output()
+            )
 
     def update_output():
         nonlocal user_output, user_output_table
