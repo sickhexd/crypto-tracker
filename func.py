@@ -7,13 +7,13 @@ def get_info():
         f.write(response.text)
     return response.text 
 
-def get_ticker(vallet1,vallet2="usdt"):
+def get_ticker(vallet1,vallet2):
     response = requests.get(url=f"https://yobit.net/api/3/ticker/{vallet1}_{vallet2}?ignore_invalid=1")
     with open("tikcers.txt","w") as f:
         f.write(response.text)
     return response.text
 
-def get_depth(vallet1,vallet2="usdt",limit=150):
+def get_depth(vallet1,vallet2,limit=150):
     response = requests.get(url=f"https://yobit.net/api/3/depth/{vallet1}_{vallet2}?limit={limit}?ignore_invalid=1")
     with open("depth.txt","w") as f:
         f.write(response.text)
@@ -27,7 +27,7 @@ def get_depth(vallet1,vallet2="usdt",limit=150):
     return f"{total_bids_amount} $$$"
 
 
-def get_trades(vallet1, vallet2="usdt", limit=150):
+def get_trades(vallet1, vallet2, limit=150):
     response = requests.get(url=f"https://yobit.net/api/3/trades/{vallet1}_{vallet2}?limit={limit}")
     total_trade_asks = 0
     total_trade_bids = 0
@@ -38,7 +38,7 @@ def get_trades(vallet1, vallet2="usdt", limit=150):
             total_trade_bids += item["price"] * item["amount"]
     return f"{vallet1.upper()} TOTAL SELL {round(total_trade_asks, 2)} $$$\n{vallet1.upper()} TOTAL BUY {round(total_trade_bids, 2)} $$$"
 
-def data_framed(vallet1, vallet2="usdt", limit=150):
+def data_framed(vallet1, vallet2, limit=150):
     response = requests.get(url=f"https://yobit.net/api/3/trades/{vallet1}_{vallet2}?limit={limit}")
     df = pd.json_normalize(response.json()[f"{vallet1}_{vallet2}"])
     df.drop(columns=['tid', 'timestamp'], inplace=True)
