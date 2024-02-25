@@ -36,7 +36,7 @@ def get_trades(wallet1, wallet2, limit=150):
             total_trade_asks += item["price"] * item["amount"]
         else:
             total_trade_bids += item["price"] * item["amount"]
-    return f"{wallet1.upper()}/{wallet2.upper} TOTAL SELL {round(total_trade_asks, 2)} $$$\n{wallet1.upper()} TOTAL BUY {round(total_trade_bids, 2)} $$$"
+    return f"{wallet1.upper()}/{wallet2.upper()} TOTAL SELL {round(total_trade_asks, 2)} $$$\n{wallet1.upper()} TOTAL BUY {round(total_trade_bids, 2)} $$$"
 
 def data_framed(wallet1, wallet2, limit=150):
     response = requests.get(url=f"https://yobit.net/api/3/trades/{wallet1}_{wallet2}?limit={limit}")
