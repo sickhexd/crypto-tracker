@@ -8,11 +8,7 @@ def main(page: ft.Page):
     page.window_width = 650
     page.window_height = 450
 
-    popular = {
-        "Bitcoin": "btc",
-        "Ethirium": "eth",
-        "USDT": "usdt",
-    }
+
     
     user_output = ft.Text(value='')
     user_output_table = ft.Text(value='')
@@ -22,6 +18,9 @@ def main(page: ft.Page):
             ft.dropdown.Option("eth"),
             ft.dropdown.Option("doge"),
             ft.dropdown.Option("usdt"),
+            ft.dropdown.Option("trx"),
+            ft.dropdown.Option("toncoin"),
+            ft.dropdown.Option("ltc"),
             ], 
             on_change=lambda _: update_output()
             )
@@ -31,6 +30,9 @@ def main(page: ft.Page):
             ft.dropdown.Option("eth"),
             ft.dropdown.Option("doge"),
             ft.dropdown.Option("usdt"),
+            ft.dropdown.Option("trx"),
+            ft.dropdown.Option("toncoin"),
+            ft.dropdown.Option("ltc"),
             ], 
             on_change=lambda _: update_output()
             )

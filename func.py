@@ -27,7 +27,7 @@ def get_depth(wallet1,wallet2,limit=150):
     return f"{total_bids_amount} $$$"
 
 
-def get_trades(wallet1, wallet2, limit=150):
+def get_trades(wallet1, wallet2, limit=150):  
     response = requests.get(url=f"https://yobit.net/api/3/trades/{wallet1}_{wallet2}?limit={limit}")
     total_trade_asks = 0
     total_trade_bids = 0
