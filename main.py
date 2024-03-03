@@ -39,9 +39,17 @@ def main(page: ft.Page):
 
     def update_output():
         nonlocal user_output, user_output_table
-        user_output.value = func.get_trades(input1.value, input2.value)
+        # user_output.value = func.get_trades(input1.value, input2.value)
+        # user_output.update()
+        # user_output_table.value = func.data_framed(input1.value, input2.value)
+        # user_output_table.update()
+        if input1.value == input2.value:
+            user_output.value = 'error'
+            user_output_table.value = ''
+        else:
+            user_output.value = func.get_trades(input1.value, input2.value)
+            user_output_table.value = func.data_framed(input1.value, input2.value)
         user_output.update()
-        user_output_table.value = func.data_framed(input1.value, input2.value)
         user_output_table.update()
 
     page.add(
