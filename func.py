@@ -1,6 +1,7 @@
 import requests
 import pandas as pd
-
+import datetime
+import pprint
 def get_info():
     response = requests.get(url="https://yobit.net/api/3/info")
     with open ("info.txt", "w") as f:
@@ -46,3 +47,29 @@ def data_framed(wallet1, wallet2, limit=150):
     df['Тип'] = df['Тип'].map({'ask': 'Покупка', 'bid': 'Продажа'})
     df['Цена'] = df['Цена'].round(2)
     return df.head(11).to_string(index=False)
+
+
+
+def graph_creator(wallet1, start_date, end_date):
+    values=[]
+    dates=[]
+
+    start_timestamp = int(datetime.datetime.strptime(start_date, "%d.%m.%Y").timestamp())
+    end_timestamp = int(datetime.datetime.strptime(end_date, "%d.%m.%Y").timestamp())
+    
+    url = f'https://api.coingecko.com/api/v3/coins/{wallet1}/market_chart/range?vs_currency=usd&from={start_timestamp}&to={end_timestamp}'
+    response = requests.get(url)
+    data = response.json()
+    
+    prices = data['prices']
+    
+    modified_prices = [price[1:] for price in prices]
+    modified_dates = [datetime.datetime.fromtimestamp(date[0] / 1000).strftime("%Y-%m-%d") for date in prices]
+    
+    for price in modified_prices:
+        values.append(price[0])
+    
+    for date in modified_dates:
+        dates.append(date)
+    
+    return dates,values
